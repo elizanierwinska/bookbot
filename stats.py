@@ -1,5 +1,3 @@
-# import unittest
-
 def get_num_words(book):
     text = book.split()
     return len(text)
@@ -15,18 +13,26 @@ def get_letters(array):
                 dict[l] = 1
     return dict
 
-def sorted_list(dict):
-    list = []
-    for d in dict:
-        if d.isalpha():
-            temp = {}
-            temp["char"] = d
-            temp["num"] = dict[d]
-            list.append(temp)
-    return list
+def sort_on(dictionary):
+    return dictionary["num"]
 
-def sort_on(dict):
-    return dict["num"]
-# class TestGetBookTextFunction(unittest.TestCase):
-#     def test_null_input(self):
-#         self.assertEqual(get_book_text(""), FileNotFoundError)
+
+"""
+    Sort a dictionary by the number of times letters appeared in a book.
+
+    Parameters:
+        dictionary (dict): A dictionary where keys are letters and values are their frequency.
+
+    Returns:
+        list[dict]: A list of dictionaries with keys 'char' and 'num', sorted by 'num' in descending order.
+"""
+def sort_dict(letter_counts):
+    sorted_list = []
+    for letter in letter_counts:
+        if letter.isalpha():
+            sorted_list.append({
+                "char": letter,
+                "num": letter_counts[letter]
+            })
+    sorted_list.sort(reverse=True, key=sort_on)
+    return sorted_list
